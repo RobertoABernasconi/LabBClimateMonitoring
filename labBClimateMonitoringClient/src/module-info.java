@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * @author rebbe
+ *
+ */
+module labBClimateMonitoringClient {
+}
