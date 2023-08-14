@@ -1,0 +1,19 @@
+package labBClimateMonitoringServer;
+
+import java.net.*;
+import java.io.*;
+
+public class MainServer {
+
+	public static void main(String[] args) {
+		int port = 6066;
+		try {
+			CMServer server = new CMServer();	
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+
+	}
+
+}

@@ -1,0 +1,23 @@
+package labBClimateMonitoringServer;
+
+import java.net.*;
+import java.io.*;
+
+public class ServerMain {
+
+	public static void main(String[] args) {
+		int port = 6066;
+		
+		DBManager manager = new DBManager();
+		
+		try {
+			Thread server = new CMServer(6066);
+			server.start();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+
+	}
+
+}

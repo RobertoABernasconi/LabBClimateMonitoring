@@ -1,0 +1,12 @@
+package labBClimateMonitoringServer;
+
+import java.net.*;
+import java.io.*;
+
+public class CMConnectionHandler extends Thread{
+	
+	public CMConnectionHandler(Socket socket) {
+		
+	}
+	
+}

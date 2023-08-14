@@ -1,0 +1,9 @@
+package labBClimateMonitoringClient;
+
+public class MainClient {
+
+	public static void main(String[] args) {
+		GUI graphicInterface = new GUI();
+		ClimateMonitoring monitor = new ClimateMonitoring();
+	}
+}

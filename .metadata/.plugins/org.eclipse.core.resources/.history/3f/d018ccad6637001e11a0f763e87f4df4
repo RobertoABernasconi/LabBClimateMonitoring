@@ -1,0 +1,9 @@
+package labBClimateMonitoringClient;
+
+public class ClimateMonitoring {
+
+	public ClimateMonitoring() {
+		
+	}
+	
+}

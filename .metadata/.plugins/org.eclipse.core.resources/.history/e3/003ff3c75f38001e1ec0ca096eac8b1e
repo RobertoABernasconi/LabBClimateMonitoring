@@ -1,0 +1,10 @@
+package labBClimateMonitoringServer;
+
+public class MainServer {
+
+	public static void main(String[] args) {
+		CMServer server = new CMServer();
+
+	}
+
+}

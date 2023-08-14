@@ -1,0 +1,5 @@
+package labBClimateMonitoringServer;
+
+public class CMConnectionHandler {
+
+}
