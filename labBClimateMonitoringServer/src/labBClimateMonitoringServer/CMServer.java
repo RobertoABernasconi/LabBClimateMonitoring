@@ -3,16 +3,12 @@ package labBClimateMonitoringServer;
 import java.net.*;
 import java.io.*;
 
-public class CMServer extends Thread {
+public class CMServer {
 	private ServerSocket serverSocket;
 	private int port;
 	
 	CMServer(int port) throws IOException {
 		this.port = port;
-		this.run();
-	}
-	
-	public void run() {
 		try {
 			serverSocket = new ServerSocket(port);
 			while(true) {
@@ -21,7 +17,7 @@ public class CMServer extends Thread {
 	    		System.out.println("Connessione effettuata");
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				System.out.println("errore IO in CMServer");
 				}
 	}
 }

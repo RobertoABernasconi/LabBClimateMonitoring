@@ -4,6 +4,8 @@ import java.net.*;
 import java.io.*;
 
 public class ConnectionManager {
+	private ObjectOutputStream out;
+	private ObjectInputStream in;
 	public ConnectionManager(int port) {
 		InetAddress address = null;
 		try {
@@ -13,18 +15,16 @@ public class ConnectionManager {
 		}
 		
 		try {
-			System.out.println("Connecting to " + "127.0.0.1" + " on port " + port);
+			System.out.println("Connecting to " + address.toString() + " on port " + port);
 		    Socket client = new Socket(address, port);
-		    /*System.out.println("Just connected to " + client.getRemoteSocketAddress());
-		    OutputStream outToServer = client.getOutputStream();
-		    DataOutputStream out = new DataOutputStream(outToServer);
-		    out.writeUTF("Hello from " + client.getLocalSocketAddress());
-		    InputStream inFromServer = client.getInputStream();
-		    DataInputStream in = new DataInputStream(inFromServer);
-		    System.out.println("Server says " + in.readUTF());*/
+		    System.out.println("Just connected to " + client.getRemoteSocketAddress());
+		    out = new ObjectOutputStream(client.getOutputStream());
+		    out.writeObject("Hello");
+		    in = new ObjectInputStream(client.getInputStream());
+		    System.out.println("Server says " + in.readObject().toString());
 		    client.close();
 		    
-			} catch (IOException e) {
+			} catch (IOException | ClassNotFoundException e) {
 				e.printStackTrace();
 			}
 	}

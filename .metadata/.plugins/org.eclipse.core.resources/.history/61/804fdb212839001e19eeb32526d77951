@@ -1,5 +1,0 @@
-package labBClimateMonitoringServer;
-
-public class CMConnectionHandler extends Thread{
-	
-}

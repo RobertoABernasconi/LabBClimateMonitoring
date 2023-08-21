@@ -1,9 +1,0 @@
-package labBClimateMonitoringClient;
-
-public class ClimateMonitoring {
-
-	public ClimateMonitoring() {
-		ConnectionManager connectionManager = new ConnectionManager();
-	}
-	
-}

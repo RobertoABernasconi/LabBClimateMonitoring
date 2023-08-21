@@ -22,7 +22,7 @@ public class CMConnectionHandler extends Thread{
 			
 			
 			while(true) {
-				input = (String) in.readObject();
+				input = in.readObject().toString();
 				switch(input) {
 				case "registerUser" :
 					//funzione register
@@ -44,12 +44,16 @@ public class CMConnectionHandler extends Thread{
 					break;
 				default :
 					out.writeObject("input non valido"); //messaggio di errore per il client
-					
 				}
 			}
 		} catch (ClassNotFoundException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("ClassNotFoundException o IOException");
+		} finally {
+			try {
+				clientSocket.close();
+			} catch (IOException e) {
+				System.out.println("IOException chiudendo il socket del server.");
+			}
 		}
 		
 	}

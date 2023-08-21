@@ -6,4 +6,5 @@
  *
  */
 module labBClimateMonitoringClient {
+	requires java.desktop;
 }
