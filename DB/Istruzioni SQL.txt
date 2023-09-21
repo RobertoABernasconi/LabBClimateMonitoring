@@ -1,0 +1,1 @@
+--command " "\\copy public.\"CoordinateMonitoraggio\" (\"Geo_id\", \"Latitudine\", \"Longitudine\", \"Denominazione\", \"Stato\", \"CountryCode\") FROM 'C:/Users/ItacUchi98/Desktop/geonames-and-coordinates_utf.CSV' DELIMITER ';' CSV HEADER FORCE NOT NULL \"Geo_id\", \"Latitudine\", \"Longitudine\", \"Denominazione\", \"Stato\", \"CountryCode\" ;""
