@@ -6,4 +6,5 @@
  *
  */
 module labBClimateMonitoringServer {
+	requires java.sql;
 }

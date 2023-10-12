@@ -24,22 +24,23 @@ public class CMConnectionHandler extends Thread{
 			while(true) {
 				input = in.readObject().toString();
 				switch(input) {
-				case "registerUser" :
-					//funzione register
+				case "registerUser" : //nome cognome CF email userid password centromonitoraggio
+					input = in.readObject().toString(); //TODO riceve oggetto serializable
+					registerUser(input);
 					break;
 				case "login" : 
-					//funzione login
+					//funzione login variabile "loggato" booleana
 					break;
 				case "registerArea" :
-					//funzione registerArea
+					//funzione registerArea oggetto come per registerUser
 					break;
 				case "searchArea" :
 					//funzione searchArea
 					break;
-				case "registerMonitoringCentre" :
-					//funzione registerMonitoringCentre
+				case "registerMonitoringCentre" : //TODO oggetto
+					//funzione registerMonitoringCentre	
 					break;
-				case "insertClimateParameters" :
+				case "insertClimateParameters" : //TODO oggetto come per registerUser
 					//funzione insertClimateParameters
 					break;
 				default :
@@ -55,6 +56,10 @@ public class CMConnectionHandler extends Thread{
 				System.out.println("IOException chiudendo il socket del server.");
 			}
 		}
+		
+	}
+	
+	private void registerUser(String input) { //TODO oggetto RegisteredUser
 		
 	}
 }

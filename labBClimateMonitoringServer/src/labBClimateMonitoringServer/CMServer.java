@@ -6,8 +6,10 @@ import java.io.*;
 public class CMServer {
 	private ServerSocket serverSocket;
 	private int port;
+
 	
 	CMServer(int port) throws IOException {
+
 		this.port = port;
 		try {
 			serverSocket = new ServerSocket(port);

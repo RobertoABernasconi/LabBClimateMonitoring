@@ -1,4 +1,4 @@
-package serverCM;
+package labBClimateMonitoringClient;
 
 import java.io.Serializable;
 
