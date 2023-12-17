@@ -2,63 +2,63 @@ package labBClimateMonitoringClient;
 
 import java.io.Serializable;
 
-public class ParametriClimatici implements Serializable{
+public class ClimateParameters implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private CentriMonitoraggio nameCM;
-	private CoordinateMonitoraggio interestedArea;
-	private String dataRilevazione;
+	private MonitoringCentre nameCM;
+	private Coordinates interestedArea;
+	private String date;
 	private String climateCategory;
 	private String explanation;
 	private int score;
 	private String notes;
 	
-	public ParametriClimatici() {
+	public ClimateParameters() {
 		super();
 		this.nameCM = null;
 		this.interestedArea = null;
-		this.dataRilevazione = "";
+		this.date = "";
 		this.climateCategory = "";
 		this.explanation = "";
 		this.score = 0;
 		this.notes = "";
 	}
 	
-	public ParametriClimatici(CentriMonitoraggio nameCM, CoordinateMonitoraggio interestedArea, String dataRilevazione,
+	public ClimateParameters(MonitoringCentre nameCM, Coordinates interestedArea, String date,
 			String climateCategory, String explanation, int score, String notes) {
 		super();
 		this.nameCM = nameCM;
 		this.interestedArea = interestedArea;
-		this.dataRilevazione = dataRilevazione;
+		this.date = date;
 		this.climateCategory = climateCategory;
 		this.explanation = explanation;
 		this.score = score;
 		this.notes = notes;
 	}
 
-	public synchronized CentriMonitoraggio getNameCM() {
+	public synchronized MonitoringCentre getNameCM() {
 		return nameCM;
 	}
 
-	public synchronized void setNameCM(CentriMonitoraggio nameCM) {
+	public synchronized void setNameCM(MonitoringCentre nameCM) {
 		this.nameCM = nameCM;
 	}
 
-	public synchronized CoordinateMonitoraggio getInterestedArea() {
+	public synchronized Coordinates getInterestedArea() {
 		return interestedArea;
 	}
 
-	public synchronized void setInterestedArea(CoordinateMonitoraggio interestedArea) {
+	public synchronized void setInterestedArea(Coordinates interestedArea) {
 		this.interestedArea = interestedArea;
 	}
 
-	public synchronized String getDataRilevazione() {
-		return dataRilevazione;
+	public synchronized String getDate() {
+		return date;
 	}
 
-	public synchronized void setDataRilevazione(String dataRilevazione) {
-		this.dataRilevazione = dataRilevazione;
+	public synchronized void setDate(String date) {
+		this.date = date;
 	}
 
 	public synchronized String getClimateCategory() {
