@@ -25,7 +25,7 @@ public class ParameterAddingWindow extends JFrame {
 	private JTextField textField_6;
 
 	private MonitoringCentre nameCM;
-	private Coordinates interestedArea;
+	private InterestedArea interestedArea;
 	private String date;
 	private String climateCategory;
 	private String explanation;

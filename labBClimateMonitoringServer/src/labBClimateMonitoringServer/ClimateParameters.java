@@ -7,7 +7,7 @@ public class ClimateParameters implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private MonitoringCentre nameCM;
-	private Coordinates interestedArea;
+	private InterestedArea interestedArea;
 	private String date;
 	private String climateCategory;
 	private String explanation;
@@ -25,7 +25,7 @@ public class ClimateParameters implements Serializable{
 		this.notes = "";
 	}
 	
-	public ClimateParameters(MonitoringCentre nameCM, Coordinates interestedArea, String date,
+	public ClimateParameters(MonitoringCentre nameCM, InterestedArea interestedArea, String date,
 			String climateCategory, String explanation, int score, String notes) {
 		super();
 		this.nameCM = nameCM;
@@ -45,11 +45,11 @@ public class ClimateParameters implements Serializable{
 		this.nameCM = nameCM;
 	}
 
-	public synchronized Coordinates getInterestedArea() {
+	public synchronized InterestedArea getInterestedArea() {
 		return interestedArea;
 	}
 
-	public synchronized void setInterestedArea(Coordinates interestedArea) {
+	public synchronized void setInterestedArea(InterestedArea interestedArea) {
 		this.interestedArea = interestedArea;
 	}
 
