@@ -1,12 +1,15 @@
 package labBClimateMonitoringServer;
 
 import java.net.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.io.*;
 
 public class CMConnectionHandler extends Thread{
 	private Socket clientSocket;
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
+	private DBManager dbM;
 	
 	public CMConnectionHandler(Socket socket) {
 		this.clientSocket = socket;
@@ -17,7 +20,7 @@ public class CMConnectionHandler extends Thread{
 			out = new ObjectOutputStream(clientSocket.getOutputStream());
 			in = new ObjectInputStream(clientSocket.getInputStream());			
 			String input;
-			
+			boolean result = false;
 			//todo gestione username, password e host per connettere al DB, se non sono valide, annulla la connessione
 			
 			
@@ -25,23 +28,39 @@ public class CMConnectionHandler extends Thread{
 				input = in.readObject().toString();
 				switch(input) {
 				case "registerUser" : //nome cognome CF email userid password centromonitoraggio
-					input = in.readObject().toString(); //TODO riceve oggetto serializable
-					registerUser(input);
+					Registered user = (Registered) in.readObject(); //TODO riceve oggetto serializable
+					registerUser(user);
 					break;
 				case "login" : 
 					//funzione login variabile "loggato" booleana
+					String userid = (String) in.readObject();
+					String pwd = (String) in.readObject();
+					String userRegistered = login(userid, pwd);
+					if(!userRegistered.isEmpty()) {
+						//Reindirizzato alla pagina iniziale con funzioni sbloccate
+					}
 					break;
 				case "registerArea" :
 					//funzione registerArea oggetto come per registerUser
+					InterestedArea intArea = (InterestedArea) in.readObject();
+					result = registerArea(intArea);
+					out.writeBoolean(result);
 					break;
 				case "searchArea" :
 					//funzione searchArea
+					
 					break;
 				case "registerMonitoringCentre" : //TODO oggetto
 					//funzione registerMonitoringCentre	
+					MonitoringCentre mc = (MonitoringCentre) in.readObject();
+					result = insertMonitoringCentre(mc);
+					out.writeBoolean(result);
 					break;
 				case "insertClimateParameters" : //TODO oggetto come per registerUser
 					//funzione insertClimateParameters
+					ClimateParameters cp = (ClimateParameters) in.readObject();
+					result = insertClimateParameters(cp);
+					out.writeBoolean(result);
 					break;
 				default :
 					out.writeObject("input non valido"); //messaggio di errore per il client
@@ -59,7 +78,71 @@ public class CMConnectionHandler extends Thread{
 		
 	}
 	
-	private void registerUser(String input) { //TODO oggetto RegisteredUser
-		
+	private String login(String userid, String pwd) {
+		// TODO Auto-generated method stub
+		String user = "";
+		String query = "SELECT name, surname FROM operatoriRegistrati WHERE userid = "+userid+" AND password = "+pwd+"";
+		ResultSet resultQuery = dbM.queryDB(query);
+		if(resultQuery.equals(null)) {
+			System.out.println("ERRORE! UTENTE NON LOGGATO");
+		}else {
+			try {
+				String name = (String) resultQuery.getObject("name");
+				String surname = (String) resultQuery.getObject("surname");
+				user = name + " "+surname;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return user;
+	}
+
+	private boolean registerArea(InterestedArea intArea) {
+		// TODO Auto-generated method stub
+		String query = "INSERT INTO InterestedArea (Geo_id, Latitudine, Longitudine, Denominazione, Stato, CountryCode) "
+				+ "VALUES ("+intArea.getGeo_ID()+", "+intArea.getLa()+", "+intArea.getLon()+", "+intArea.getName()+", "+intArea.getState()+
+				", "+intArea.getCountryCode()+")";
+		boolean result = dbM.updateDB(query);
+		return result;
+	}
+
+	private boolean insertMonitoringCentre(MonitoringCentre mc) {
+		// TODO Auto-generated method stub
+		String query = "INSERT INTO centriMonitoraggio (nome, areaInteresse) VALUES ("+mc.getCentreName()+", "+mc.getArea()+")";
+		boolean result = dbM.updateDB(query);
+		query = "INSERT INTO address (via, civico, cap, comune, provincia) VALUES ("+mc.getAddress()+", "+mc.getStreetNumber()+", "+mc.getPostalCode()+""
+				+ mc.getCity()+", "+mc.getProvince()+")";
+		result = dbM.updateDB(query);
+		String selectIDAddress = "SELECT id_A from Address WHERE via = "+mc.getAddress()+"  AND civico = "+mc.getStreetNumber()+
+				" AND cap = "+mc.getPostalCode()+" AND comune = "+mc.getCity()+" AND provincia = "+mc.getProvince()+"";
+		ResultSet res = dbM.queryDB(selectIDAddress);
+		int idA = 0;
+		try {
+			idA = res.getInt("id_A");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		query = "INSERT INTO indirizzoCentri (name, id) VALUES ("+mc.getCentreName()+", "+idA+")";
+		result = dbM.updateDB(query);
+		return result;
+	}
+
+	private boolean insertClimateParameters(ClimateParameters cp) {
+		// TODO Auto-generated method stub
+		String query = "INSERT INTO parametriClimatici (nameCM, interestedArea, dataRilevazione, climateCategory, explanation, score, notes) "
+				+ "VALUES ("+cp.getNameCM()+", "+cp.getInterestedArea()+", "+cp.getDate()+", "+cp.getClimateCategory()+", "+
+		cp.getExplanation()+", "+cp.getScore()+", "+cp.getNotes()+")";
+		boolean result = dbM.updateDB(query);
+		return result;
+	}
+
+	private boolean registerUser(Registered user) { //TODO oggetto RegisteredUser
+		String query = "INSERT INTO operatoriRegistrati (CF, name, surname, mail, userid, password, nameCM) "
+				+ "VALUES ("+user.getSsn()+", "+user.getName()+", "+user.getSurname()+", "+user.getMail()+", "+user.getUser()+
+				", "+user.getPwd()+", "+user.getCentreName()+")";
+		boolean result = dbM.updateDB(query);
+		return result;
 	}
 }
