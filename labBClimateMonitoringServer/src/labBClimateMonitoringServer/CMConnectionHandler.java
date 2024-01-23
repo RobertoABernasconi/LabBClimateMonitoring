@@ -48,7 +48,24 @@ public class CMConnectionHandler extends Thread{
 					break;
 				case "searchArea" :
 					//funzione searchArea
+					boolean nameSearch = in.readBoolean();
+					if(nameSearch) {
+						String name = (String) in.readObject();
+						ResultSet resultQuery = searchAreaName(name);
+						out.writeObject(resultQuery);
+					}else {
+						String latitude = (String) in.readObject();
+						String longitude = (String) in.readObject();
+						ResultSet resultQuery = searchArea(latitude, longitude);
+						out.writeObject(resultQuery);
+					}
 					
+					break;
+				case "viewArea" :
+					
+					InterestedArea inA = (InterestedArea) in.readObject();
+					ClimateParameters[] climateParam = ViewArea(inA);
+					out.writeObject(climateParam);
 					break;
 				case "registerMonitoringCentre" : //TODO oggetto
 					//funzione registerMonitoringCentre	
@@ -78,6 +95,44 @@ public class CMConnectionHandler extends Thread{
 		
 	}
 	
+	private ClimateParameters[] ViewArea(InterestedArea inA) {
+		
+		ClimateParameters[] cp = null;
+		String query = "SELECT * FROM parametriClimatici WHERE InterestedArea = "+inA.getGeo_ID();
+		ResultSet result = dbM.queryDB(query);
+		int i = 0;
+		try {
+			while(result.next()) {
+				cp[i].setNameCM((MonitoringCentre) result.getObject(1));
+				cp[i].setClimateCategory((String) result.getObject(4));
+				cp[i].setDate(result.getObject(3).toString());
+				cp[i].setExplanation((String) result.getObject(5));
+				cp[i].setNotes((String) result.getObject(7));
+				cp[i].setScore(Integer.parseInt(result.getObject(6).toString()));
+				cp[i].setInterestedArea(inA);
+				i++;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cp;
+	}
+
+	private ResultSet searchArea(String latitude, String longitude) {
+		
+		String query = "SELECT * FROM InterestedArea WHERE latitudine = "+latitude+" AND Longitudine = "+longitude+"";
+		ResultSet result = dbM.queryDB(query);
+		return result;
+	}
+	
+private ResultSet searchAreaName(String name) {
+		
+		String query = "SELECT * FROM InterestedArea WHERE Denominazione = "+name+"";
+		ResultSet result = dbM.queryDB(query);
+		return result;
+	}
+
 	private String login(String userid, String pwd) {
 		// TODO Auto-generated method stub
 		String user = "";
