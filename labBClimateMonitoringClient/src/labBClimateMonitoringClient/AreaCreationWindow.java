@@ -12,9 +12,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 public class AreaCreationWindow extends JFrame {
-
-	//TODO completare finestra e funzionalita', questa e' solo copia della base
 	
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -22,22 +21,10 @@ public class AreaCreationWindow extends JFrame {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
-	private JTextField textField_6;
-
-	/*
-	private String centreName;
-	private int area;
-	private String address;
-	private int streetNumber;
-	private int postalCode;
-	private String city;
-	private String province;
-	*/
-	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void start() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -53,7 +40,7 @@ public class AreaCreationWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AreaCreationWindow() {
+	private AreaCreationWindow() {
 		
 		ActionListener listener = new ActionListener() {
 			String cmd = null;
@@ -62,9 +49,10 @@ public class AreaCreationWindow extends JFrame {
 				cmd = e.getActionCommand();
 				switch (cmd) {
 					case "Register":
-						MonitoringCentre result = createCentre();
-						System.out.println(result.getCentreName());
-						
+						InterestedArea result = createArea();
+						if(!ConnectionManager.getInstance().registerArea(result)) {
+							ErrorWindow.start("Error: could not register area. Try again.");
+						}
 						break;
 					case "Cancel":
 						dispose();
@@ -82,33 +70,29 @@ public class AreaCreationWindow extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Centre Name");
+		JLabel lblNewLabel = new JLabel("Geo ID");
 		lblNewLabel.setBounds(31, 10, 90, 13);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Area");
+		JLabel lblNewLabel_1 = new JLabel("Latitude");
 		lblNewLabel_1.setBounds(31, 33, 90, 13);
 		contentPane.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("Address");
+		JLabel lblNewLabel_2 = new JLabel("Longitude");
 		lblNewLabel_2.setBounds(31, 56, 90, 13);
 		contentPane.add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("Street Number");
+		JLabel lblNewLabel_3 = new JLabel("Area Name");
 		lblNewLabel_3.setBounds(31, 79, 90, 13);
 		contentPane.add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_4 = new JLabel("Postal Code");
+		JLabel lblNewLabel_4 = new JLabel("State");
 		lblNewLabel_4.setBounds(31, 102, 90, 13);
 		contentPane.add(lblNewLabel_4);
 		
-		JLabel lblNewLabel_5 = new JLabel("City");
+		JLabel lblNewLabel_5 = new JLabel("Country Code");
 		lblNewLabel_5.setBounds(31, 125, 90, 13);
 		contentPane.add(lblNewLabel_5);
-		
-		JLabel lblNewLabel_6 = new JLabel("Province");
-		lblNewLabel_6.setBounds(31, 148, 90, 13);
-		contentPane.add(lblNewLabel_6);
 		
 		textField = new JTextField();
 		textField.setBounds(196, 7, 96, 19);
@@ -140,11 +124,6 @@ public class AreaCreationWindow extends JFrame {
 		contentPane.add(textField_5);
 		textField_5.setColumns(10);
 		
-		textField_6 = new JTextField();
-		textField_6.setBounds(196, 145, 96, 19);
-		contentPane.add(textField_6);
-		textField_6.setColumns(10);
-		
 		JButton btnNewButton = new JButton("Register");
 		btnNewButton.setBounds(132, 338, 85, 21);
 		btnNewButton.addActionListener(listener);
@@ -158,11 +137,7 @@ public class AreaCreationWindow extends JFrame {
 		contentPane.add(btnNewButton_1);
 	}
 	
-	private MonitoringCentre createCentre() {
-		MonitoringCentre centre;
-		
-		centre = new MonitoringCentre(textField.getText(), Integer.parseInt(textField_1.getText()), textField_2.getText(), Integer.parseInt(textField_3.getText()), Integer.parseInt(textField_4.getText()), textField_5.getText(), textField_6.getText());		
-		//TODO inserire nel DB
-		return centre;
+	private InterestedArea createArea() {
+		return new InterestedArea(Integer.parseInt(textField.getText()), Double.parseDouble(textField_1.getText()), Double.parseDouble(textField_2.getText()), textField_3.getText(), textField_4.getText(), textField_5.getText());
 	}
 }

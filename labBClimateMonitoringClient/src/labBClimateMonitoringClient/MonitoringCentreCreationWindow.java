@@ -13,6 +13,7 @@ import javax.swing.JButton;
 
 public class MonitoringCentreCreationWindow extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -21,19 +22,11 @@ public class MonitoringCentreCreationWindow extends JFrame {
 	private JTextField textField_4;
 	private JTextField textField_5;
 	private JTextField textField_6;
-
-	private String centreName;
-	private int area;
-	private String address;
-	private int streetNumber;
-	private int postalCode;
-	private String city;
-	private String province;
 	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void start() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -49,7 +42,7 @@ public class MonitoringCentreCreationWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MonitoringCentreCreationWindow() {
+	private MonitoringCentreCreationWindow() {
 		
 		ActionListener listener = new ActionListener() {
 			String cmd = null;
@@ -58,8 +51,9 @@ public class MonitoringCentreCreationWindow extends JFrame {
 				cmd = e.getActionCommand();
 				switch (cmd) {
 					case "Register":
-						MonitoringCentre result = createCentre();
-						System.out.println(result.getCentreName());
+						if(!ConnectionManager.getInstance().registerMonitoringCentre(createCentre())) {
+							ErrorWindow.start("Error: could not register monitoring centre");
+						};
 						
 						break;
 					case "Cancel":
@@ -141,7 +135,7 @@ public class MonitoringCentreCreationWindow extends JFrame {
 		contentPane.add(textField_6);
 		textField_6.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Register");
+		JButton btnNewButton = new JButton("Create");
 		btnNewButton.setBounds(132, 338, 85, 21);
 		btnNewButton.addActionListener(listener);
 		btnNewButton.setActionCommand("Register");
@@ -157,8 +151,7 @@ public class MonitoringCentreCreationWindow extends JFrame {
 	private MonitoringCentre createCentre() {
 		MonitoringCentre centre;
 		
-		centre = new MonitoringCentre(textField.getText(), Integer.parseInt(textField_1.getText()), textField_2.getText(), Integer.parseInt(textField_3.getText()), Integer.parseInt(textField_4.getText()), textField_5.getText(), textField_6.getText());		
-		//TODO inserire nel DB
+		centre = new MonitoringCentre(textField.getText(), Integer.parseInt(textField_1.getText()), textField_2.getText(), Integer.parseInt(textField_3.getText()), Integer.parseInt(textField_4.getText()), textField_5.getText(), textField_6.getText());
 		return centre;
 	}
 }

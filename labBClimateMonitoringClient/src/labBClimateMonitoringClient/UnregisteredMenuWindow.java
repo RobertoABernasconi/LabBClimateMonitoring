@@ -5,25 +5,28 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JList;
+import java.awt.Component;
 
 public class UnregisteredMenuWindow extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
-	private JTextField textField_3;
 	private JTextField textField_4;
+	private DefaultListModel<String> listModel = new DefaultListModel<String>();
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
+	public static void start() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -54,18 +57,32 @@ public class UnregisteredMenuWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				cmd = e.getActionCommand();
 				switch (cmd) {
-				case "View Area": //viewArea(dati)
-					AreaViewWindow.main(null);
+				case "View Area":
+					AreaViewWindow.start(ConnectionManager.getInstance().viewArea(textField_4.getText()));
 					break;
 				case "Register":
-					RegistrationWindow.main(null);
+					RegistrationWindow.start();
 					break;
 				case "Search for Area":
-					textField_3.setEnabled(true);
-					textField_3.setText("testo da mostrare"); //TODO mostrare risultato dal DB
+					ArrayList<InterestedArea> iaList = null;
+					if (textField.getText().isBlank()) {
+						if(!(textField_1.getText().isBlank() || textField_2.getText().isBlank())) {
+							iaList = ConnectionManager.getInstance().searchArea(Double.parseDouble(textField_1.getText()),Double.parseDouble(textField_2.getText()));
+						}
+					} else {
+						iaList = ConnectionManager.getInstance().searchArea(textField.getText());
+					}
+					for (int i = 0; i < iaList.size(); i++) {
+						listModel.addElement(iaList.get(i).toString());
+					}
+					if (iaList.size() == 0) {
+						listModel = new DefaultListModel<String>();
+						listModel.addElement("No parameters found");
+					}
+					
 					break;
 				case "Back":
-					LoginWindow.main(null);
+					LoginWindow.start();
 					dispose();
 					break;
 						
@@ -108,14 +125,6 @@ public class UnregisteredMenuWindow extends JFrame {
 		contentPane.add(textField_2);
 		textField_2.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setEnabled(false);
-		textField_3.setEditable(false);
-		textField_3.setToolTipText("Result");
-		textField_3.setBounds(76, 10, 217, 34);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
-		
 		JLabel lblNewLabel = new JLabel("Insert Area Name:");
 		lblNewLabel.setBounds(313, 67, 127, 13);
 		contentPane.add(lblNewLabel);
@@ -138,5 +147,12 @@ public class UnregisteredMenuWindow extends JFrame {
 		btnNewButton_3.addActionListener(listener);
 		btnNewButton_3.setActionCommand("Back");
 		contentPane.add(btnNewButton_3);
+		
+		JScrollPane scrollPane = new JScrollPane((Component) null);
+		scrollPane.setBounds(92, 10, 462, 47);
+		contentPane.add(scrollPane);
+		
+		JList<String> listView = new JList<String>(listModel);
+		scrollPane.setViewportView(listView);
 	}
 }

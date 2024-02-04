@@ -12,9 +12,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 public class ParameterAddingWindow extends JFrame {
-	
-	//TODO funzionalita'
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -24,18 +23,8 @@ public class ParameterAddingWindow extends JFrame {
 	private JTextField textField_5;
 	private JTextField textField_6;
 
-	private MonitoringCentre nameCM;
-	private InterestedArea interestedArea;
-	private String date;
-	private String climateCategory;
-	private String explanation;
-	private int score;
-	private String notes;
 	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
+	public static void start() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -51,7 +40,7 @@ public class ParameterAddingWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ParameterAddingWindow() {
+	private ParameterAddingWindow() {
 		
 		ActionListener listener = new ActionListener() {
 			String cmd = null;
@@ -60,9 +49,9 @@ public class ParameterAddingWindow extends JFrame {
 				cmd = e.getActionCommand();
 				switch (cmd) {
 					case "Register":
-						ClimateParameters result = createParameters();
-						System.out.println(result.getClimateCategory()); //test
-						
+						if (!ConnectionManager.getInstance().addParameters(createParameters())) {
+							ErrorWindow.start("Error: could not add parameters");
+						}
 						break;
 					case "Cancel":
 						dispose();
@@ -157,10 +146,8 @@ public class ParameterAddingWindow extends JFrame {
 	}
 	
 	private ClimateParameters createParameters() {
-		ClimateParameters centre;
-		
-		centre = new ClimateParameters( );		
-		//TODO inserire nel DB
+		ClimateParameters centre;		
+		centre = new ClimateParameters( );
 		return centre;
 	}
 }

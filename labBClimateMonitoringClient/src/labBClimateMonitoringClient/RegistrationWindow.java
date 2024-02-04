@@ -13,6 +13,7 @@ import javax.swing.JButton;
 
 public class RegistrationWindow extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -22,10 +23,8 @@ public class RegistrationWindow extends JFrame {
 	private JTextField textField_5;
 	private JTextField textField_6;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
+
+	public static void start() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -41,7 +40,7 @@ public class RegistrationWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RegistrationWindow() {
+	private RegistrationWindow() {
 		
 		ActionListener listener = new ActionListener() {
 			String cmd = null;
@@ -50,14 +49,9 @@ public class RegistrationWindow extends JFrame {
 				cmd = e.getActionCommand();
 				switch (cmd) {
 					case "Register":
-						String[] arr = getValues();
-						//prendi arr, array di String per registrarsi sul DB
-						
-						//test
-						for (int i = 0; i < 7; i++) {
-							System.out.println(arr[i]);
+						if(!ConnectionManager.getInstance().registerUser(registeredObject())) {
+							ErrorWindow.start("Error: could not register user");
 						}
-						//fine test
 						break;
 					case "Cancel":
 						dispose();
@@ -67,7 +61,7 @@ public class RegistrationWindow extends JFrame {
 			}	
 		};
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 640, 480);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -151,17 +145,9 @@ public class RegistrationWindow extends JFrame {
 		contentPane.add(btnNewButton_1);
 	}
 	
-	private String[] getValues() {
-		String[] values = new String[7];
-		
-		values[0] = textField.getText();
-		values[1] = textField_1.getText();
-		values[2] = textField_2.getText();
-		values[3] = textField_3.getText();
-		values[4] = textField_4.getText();
-		values[5] = textField_5.getText();
-		values[6] = textField_6.getText();
-		
-		return values;
+	private Registered registeredObject() {
+		Registered result = null;
+		result = new Registered(textField.getText(), textField_1.getText(), textField_2.getText(), textField_3.getText(), textField_4.getText(), textField_5.getText(), textField_6.getText());
+		return result;
 	}
 }

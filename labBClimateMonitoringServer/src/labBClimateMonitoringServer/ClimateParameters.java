@@ -57,7 +57,7 @@ public class ClimateParameters implements Serializable{
 		return date;
 	}
 
-	public synchronized void setDate(String datee) {
+	public synchronized void setDate(String date) {
 		this.date = date;
 	}
 

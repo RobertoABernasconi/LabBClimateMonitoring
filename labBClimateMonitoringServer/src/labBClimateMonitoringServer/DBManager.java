@@ -4,36 +4,29 @@ import java.sql.*;
 
 public class DBManager {
 	
-	//TODO richiedere all'utente username, password e db host all'avvio
-	
 	//Classe Server che si interfaccia con il DB
 	
 	Connection conn;
 	Statement stat;
 	
-	private String host;
 	private String protocol;
-	private String resource;
 	private String url;
 	private String username;
 	private String pwd;
 	
 	public DBManager() {
 		//Inizializzazione Variabili di connessione
-		
-		host = "";
+	
 		username="";
 		pwd = "";
 	}
 	
 	public DBManager(String host, String username, String pwd) {
-		this.host = host;
 		this.username = username;
 		this.pwd = pwd;
 		
-		protocol = "jdbc:postgresql" + "://";
-		resource = "ClimateMonitoring";
-		url = protocol + host + resource;
+		protocol = "jdbc:postgresql://";
+		url = protocol + host;
 		
 		connectionDatabase();
 	}

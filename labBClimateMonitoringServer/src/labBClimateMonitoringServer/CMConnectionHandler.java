@@ -3,6 +3,7 @@ package labBClimateMonitoringServer;
 import java.net.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.io.*;
 
 public class CMConnectionHandler extends Thread{
@@ -11,8 +12,9 @@ public class CMConnectionHandler extends Thread{
 	private ObjectInputStream in;
 	private DBManager dbM;
 	
-	public CMConnectionHandler(Socket socket) {
+	public CMConnectionHandler(Socket socket, DBManager dbm2) {
 		this.clientSocket = socket;
+		this.dbM = dbm2;
 	}
 	
 	public void run() {
@@ -38,6 +40,9 @@ public class CMConnectionHandler extends Thread{
 					String userRegistered = login(userid, pwd);
 					if(!userRegistered.isEmpty()) {
 						//Reindirizzato alla pagina iniziale con funzioni sbloccate
+						out.writeObject("Logged in");
+					} else {
+						out.writeObject("Failed");
 					}
 					break;
 				case "registerArea" :
@@ -51,20 +56,19 @@ public class CMConnectionHandler extends Thread{
 					boolean nameSearch = in.readBoolean();
 					if(nameSearch) {
 						String name = (String) in.readObject();
-						ResultSet resultQuery = searchAreaName(name);
+						ArrayList <InterestedArea> resultQuery = searchAreaName(name);
 						out.writeObject(resultQuery);
 					}else {
-						String latitude = (String) in.readObject();
-						String longitude = (String) in.readObject();
-						ResultSet resultQuery = searchArea(latitude, longitude);
+						double latitude = in.readDouble();
+						double longitude = in.readDouble();
+						ArrayList <InterestedArea> resultQuery = searchArea(latitude, longitude);
 						out.writeObject(resultQuery);
 					}
 					
 					break;
 				case "viewArea" :
-					
-					InterestedArea inA = (InterestedArea) in.readObject();
-					ClimateParameters[] climateParam = ViewArea(inA);
+					String name = (String) in.readObject();
+					ArrayList<ClimateParameters> climateParam = ViewArea(name);
 					out.writeObject(climateParam);
 					break;
 				case "registerMonitoringCentre" : //TODO oggetto
@@ -95,42 +99,67 @@ public class CMConnectionHandler extends Thread{
 		
 	}
 	
-	private ClimateParameters[] ViewArea(InterestedArea inA) {
+	private ArrayList<ClimateParameters> ViewArea(String name) {
 		
-		ClimateParameters[] cp = null;
-		String query = "SELECT * FROM parametriClimatici WHERE InterestedArea = "+inA.getGeo_ID();
+		ArrayList <ClimateParameters> cpArray = new ArrayList <ClimateParameters>();
+		ArrayList <InterestedArea> inA = searchAreaName(name);
+		for(int j = 0; j < inA.size(); j++) {
+		String query = "SELECT * FROM parametriClimatici WHERE InterestedArea = "+inA.get(j).getGeo_ID();
 		ResultSet result = dbM.queryDB(query);
-		int i = 0;
+		ClimateParameters cp = new ClimateParameters();
 		try {
 			while(result.next()) {
-				cp[i].setNameCM((MonitoringCentre) result.getObject(1));
-				cp[i].setClimateCategory((String) result.getObject(4));
-				cp[i].setDate(result.getObject(3).toString());
-				cp[i].setExplanation((String) result.getObject(5));
-				cp[i].setNotes((String) result.getObject(7));
-				cp[i].setScore(Integer.parseInt(result.getObject(6).toString()));
-				cp[i].setInterestedArea(inA);
-				i++;
+				cp = new ClimateParameters();
+				cp.setNameCM((MonitoringCentre) result.getObject(1));
+				cp.setClimateCategory((String) result.getObject(4));
+				cp.setDate(result.getObject(3).toString());
+				cp.setExplanation((String) result.getObject(5));
+				cp.setNotes((String) result.getObject(7));
+				cp.setScore(Integer.parseInt(result.getObject(6).toString()));
+				cp.setInterestedArea(inA.get(j));
+				cpArray.add(cp);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return cp;
+		}
+		return cpArray;
 	}
 
-	private ResultSet searchArea(String latitude, String longitude) {
+	private ArrayList <InterestedArea> searchArea(double latitude, double longitude) {
 		
 		String query = "SELECT * FROM InterestedArea WHERE latitudine = "+latitude+" AND Longitudine = "+longitude+"";
 		ResultSet result = dbM.queryDB(query);
-		return result;
+		return InterestedAreaSearched(result);
 	}
 	
-private ResultSet searchAreaName(String name) {
+private ArrayList <InterestedArea> InterestedAreaSearched(ResultSet result) {
+	ArrayList <InterestedArea> inArray = new ArrayList<InterestedArea>();
+	InterestedArea inA;
+	try {
+		while(result.isAfterLast()) {
+			inA = new InterestedArea();
+			inA.setGeo_ID(result.getInt("Geo_ID"));
+			inA.setLat(result.getDouble("Latitudine"));
+			inA.setLon(result.getInt("Longitudine"));
+			inA.setName(result.getString("Denominazione"));
+			inA.setState(result.getString("Stato"));
+			inA.setCountryCode(result.getString("CountryCode"));
+			inArray.add(inA);
+		}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	return inArray;
+}
+
+private ArrayList <InterestedArea> searchAreaName(String name) {
 		
 		String query = "SELECT * FROM InterestedArea WHERE Denominazione = "+name+"";
 		ResultSet result = dbM.queryDB(query);
-		return result;
+		return InterestedAreaSearched(result);
 	}
 
 	private String login(String userid, String pwd) {

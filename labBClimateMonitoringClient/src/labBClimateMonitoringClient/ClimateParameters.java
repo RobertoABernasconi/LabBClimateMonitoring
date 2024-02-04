@@ -93,7 +93,9 @@ public class ClimateParameters implements Serializable{
 		this.notes = notes;
 	}
 	
-	
+	public String toString() {
+		return (nameCM.getCentreName() + " " + interestedArea.getName() + " " + date + " " + climateCategory + " " + explanation + " " + score + " " + notes);
+	}
 	
 	
 }

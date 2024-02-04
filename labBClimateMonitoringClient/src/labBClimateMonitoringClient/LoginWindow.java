@@ -1,6 +1,5 @@
 package labBClimateMonitoringClient;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,14 +13,12 @@ import javax.swing.JButton;
 
 public class LoginWindow extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtNomeUtente;
 	private JTextField txtPassword;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
+	public static void start() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -46,14 +43,13 @@ public class LoginWindow extends JFrame {
 				switch (cmd) {
 					case "Unregistered": {
 						dispose();
-						UnregisteredMenuWindow.main(null);
+						UnregisteredMenuWindow.start();
 						break;
 					}
 					case "Registered": {
 						//TODO: leggere testo e verificare log in
 						verifyLogIn();
 						dispose();
-						RegisteredMenuWindow.main(null);
 						break;
 					}	
 				}	
@@ -103,7 +99,11 @@ public class LoginWindow extends JFrame {
 	
 	
 	private void verifyLogIn() {
-		//TODO lookup nel DB
-		System.out.println(txtNomeUtente.getText()+txtPassword.getText());
+		if(ConnectionManager.getInstance().userLogin(txtNomeUtente.getText(), txtPassword.getText())) {
+			RegisteredMenuWindow.start();	
+		}
+		else {
+			ErrorWindow.start("Failed to log in, try again");
+		}
 	}
 }
