@@ -5,6 +5,14 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>Climate Monitoring Server</name>
+  <dependencies>
+	<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+	<dependency>
+	    <groupId>org.postgresql</groupId>
+	    <artifactId>postgresql</artifactId>
+	    <version>42.7.1</version>
+	</dependency>
+  </dependencies>
   <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>

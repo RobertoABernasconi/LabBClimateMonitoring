@@ -27,18 +27,28 @@ public class DBManager {
 		
 		protocol = "jdbc:postgresql://";
 		url = protocol + host;
-		
-		connectionDatabase();
 	}
 	
-	private void connectionDatabase() {
+	public boolean connectionDatabase() {
 		//funzione per l'instaurazione della connessione al DB
 		try {
+			Class.forName("org.postgresql.Driver");
 			conn = DriverManager.getConnection(url, username, pwd);
-			stat = conn.createStatement();
+			if(conn != null) {
+				System.out.println("Connection successfully");
+				stat = conn.createStatement();
+				return true;
+			}else {
+				System.out.println("Connection failed, wrong credential");
+				return false;
+			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+			return false;
+		} catch (ClassNotFoundException e) {
+			System.out.println("Cannot find class "+e.getMessage());
 		}
+		return false;
 	}
 	
 	public synchronized boolean updateDB(String query) {
