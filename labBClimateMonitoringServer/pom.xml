@@ -12,6 +12,12 @@
 	    <artifactId>postgresql</artifactId>
 	    <version>42.7.1</version>
 	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.checkerframework/checker-qual -->
+	<dependency>
+    	<groupId>org.checkerframework</groupId>
+    	<artifactId>checker-qual</artifactId>
+    	<version>3.41.0</version>
+	</dependency>
   </dependencies>
   <build>
     <sourceDirectory>src</sourceDirectory>
