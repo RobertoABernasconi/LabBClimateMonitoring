@@ -1,0 +1,17 @@
+--command " "\\copy public.\"CoordinateMonitoraggio\" (\"Geo_id\", \"Latitudine\", \"Longitudine\", \"Denominazione\", \"Stato\", \"CountryCode\") FROM 'C:/Users/ItacUchi98/Desktop/geonames-and-coordinates_utf.CSV' DELIMITER ';' CSV HEADER FORCE NOT NULL \"Geo_id\", \"Latitudine\", \"Longitudine\", \"Denominazione\", \"Stato\", \"CountryCode\" ;""
+
+-- Table: public.Area
+
+-- DROP TABLE IF EXISTS public."Area";
+
+CREATE TABLE IF NOT EXISTS public."Area"
+(
+    "Latitudine" numeric NOT NULL DEFAULT 0,
+    "Longitudine" numeric NOT NULL DEFAULT 0,
+    CONSTRAINT "Coordinates" PRIMARY KEY ("Latitudine", "Longitudine")
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public."Area"
+    OWNER to postgres;
