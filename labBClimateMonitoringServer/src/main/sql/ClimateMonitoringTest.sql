@@ -60,13 +60,6 @@ ALTER TABLE IF EXISTS public."indirizzoCentri"
     ON DELETE NO ACTION
     NOT VALID;
 
-ALTER TABLE IF EXISTS public."indirizzoCentri"
-    ADD CONSTRAINT indirizzo FOREIGN KEY (id)
-    REFERENCES public.address ("id_A") MATCH SIMPLE
-    ON UPDATE NO ACTION
-    ON DELETE NO ACTION
-    NOT VALID;
-
 CREATE TABLE public."operatoriRegistrati" (
     "CF" character(100) NOT NULL,
     name character(100) NOT NULL,

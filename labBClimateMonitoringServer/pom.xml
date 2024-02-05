@@ -56,7 +56,7 @@
                             <username>postgres</username>
                             <password>password</password>
                             <autocommit>true</autocommit>
-                            <sqlCommand>drop database if exists ClimateMonitoring</sqlCommand>
+                            <sqlCommand>drop database if exists climatemonitoring</sqlCommand>
                         </configuration>
                     </execution>
 
@@ -71,7 +71,7 @@
                             <username>postgres</username>
                             <password>password</password>
                             <autocommit>true</autocommit>
-                            <sqlCommand>create database ClimateMonitoring</sqlCommand>
+                            <sqlCommand>create database climatemonitoring</sqlCommand>
                         </configuration>
                     </execution>
 
@@ -82,7 +82,7 @@
                             <goal>execute</goal>
                         </goals>
                         <configuration>
-                            <url>jdbc:postgresql://localhost:5433/ClimateMonitoring</url>
+                            <url>jdbc:postgresql://localhost:5433/climatemonitoring</url>
                             <username>postgres</username>
                             <password>password</password>
                             <autocommit>true</autocommit>
@@ -97,23 +97,15 @@
             <!--create executable jar-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
+                <artifactId>maven-jar-plugin</artifactId>
                 <version>3.1.0</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>LabBClimateMonitoringServer.ServerMain</mainClass>
-                                </transformer>
-                            </transformers>
-                        </configuration>
-                    </execution>
-                </executions>
+                <configuration>
+					<archive>
+                        <manifest>
+                            <mainClass>labBClimateMonitoringServer.ServerMain</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
             </plugin>
             
         </plugins>
