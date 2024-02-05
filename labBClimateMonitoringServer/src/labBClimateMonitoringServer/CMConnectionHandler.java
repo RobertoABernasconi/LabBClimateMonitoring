@@ -120,7 +120,6 @@ public class CMConnectionHandler extends Thread{
 				cpArray.add(cp);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		}
@@ -131,39 +130,37 @@ public class CMConnectionHandler extends Thread{
 		
 		String query = "SELECT * FROM InterestedArea WHERE latitudine = "+latitude+" AND Longitudine = "+longitude+"";
 		ResultSet result = dbM.queryDB(query);
-		return InterestedAreaSearched(result);
+		return interestedAreaSearched(result);
 	}
 	
-private ArrayList <InterestedArea> InterestedAreaSearched(ResultSet result) {
-	ArrayList <InterestedArea> inArray = new ArrayList<InterestedArea>();
-	InterestedArea inA;
-	try {
-		while(result.isAfterLast()) {
-			inA = new InterestedArea();
-			inA.setGeo_ID(result.getInt("Geo_ID"));
-			inA.setLat(result.getDouble("Latitudine"));
-			inA.setLon(result.getInt("Longitudine"));
-			inA.setName(result.getString("Denominazione"));
-			inA.setState(result.getString("Stato"));
-			inA.setCountryCode(result.getString("CountryCode"));
-			inArray.add(inA);
-		}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	return inArray;
-}
+	private ArrayList <InterestedArea> interestedAreaSearched(ResultSet result) {
+		ArrayList <InterestedArea> inArray = new ArrayList<InterestedArea>();
+		InterestedArea inA;
+		try {
+			while(result.isAfterLast()) {
+				inA = new InterestedArea();
+				inA.setGeo_ID(result.getInt("Geo_ID"));
+				inA.setLat(result.getDouble("Latitudine"));
+				inA.setLon(result.getInt("Longitudine"));
+				inA.setName(result.getString("Denominazione"));
+				inA.setState(result.getString("Stato"));
+				inA.setCountryCode(result.getString("CountryCode"));
+				inArray.add(inA);
+			}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		return inArray;
+	}
 
-private ArrayList <InterestedArea> searchAreaName(String name) {
+	private ArrayList <InterestedArea> searchAreaName(String name) {
 		
 		String query = "SELECT * FROM InterestedArea WHERE Denominazione = "+name+"";
 		ResultSet result = dbM.queryDB(query);
-		return InterestedAreaSearched(result);
+		return interestedAreaSearched(result);
 	}
 
 	private String login(String userid, String pwd) {
-		// TODO Auto-generated method stub
 		String user = "";
 		String query = "SELECT name, surname FROM operatoriRegistrati WHERE userid = "+userid+" AND password = "+pwd+"";
 		ResultSet resultQuery = dbM.queryDB(query);
@@ -175,7 +172,6 @@ private ArrayList <InterestedArea> searchAreaName(String name) {
 				String surname = (String) resultQuery.getObject("surname");
 				user = name + " "+surname;
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -183,7 +179,6 @@ private ArrayList <InterestedArea> searchAreaName(String name) {
 	}
 
 	private boolean registerArea(InterestedArea intArea) {
-		// TODO Auto-generated method stub
 		String query = "INSERT INTO InterestedArea (Geo_id, Latitudine, Longitudine, Denominazione, Stato, CountryCode) "
 				+ "VALUES ("+intArea.getGeo_ID()+", "+intArea.getLa()+", "+intArea.getLon()+", "+intArea.getName()+", "+intArea.getState()+
 				", "+intArea.getCountryCode()+")";
@@ -192,7 +187,6 @@ private ArrayList <InterestedArea> searchAreaName(String name) {
 	}
 
 	private boolean insertMonitoringCentre(MonitoringCentre mc) {
-		// TODO Auto-generated method stub
 		String query = "INSERT INTO centriMonitoraggio (nome, areaInteresse) VALUES ("+mc.getCentreName()+", "+mc.getArea()+")";
 		boolean result = dbM.updateDB(query);
 		query = "INSERT INTO address (via, civico, cap, comune, provincia) VALUES ("+mc.getAddress()+", "+mc.getStreetNumber()+", "+mc.getPostalCode()+""
@@ -205,7 +199,6 @@ private ArrayList <InterestedArea> searchAreaName(String name) {
 		try {
 			idA = res.getInt("id_A");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		query = "INSERT INTO indirizzoCentri (name, id) VALUES ("+mc.getCentreName()+", "+idA+")";
@@ -214,7 +207,6 @@ private ArrayList <InterestedArea> searchAreaName(String name) {
 	}
 
 	private boolean insertClimateParameters(ClimateParameters cp) {
-		// TODO Auto-generated method stub
 		String query = "INSERT INTO parametriClimatici (nameCM, interestedArea, dataRilevazione, climateCategory, explanation, score, notes) "
 				+ "VALUES ("+cp.getNameCM()+", "+cp.getInterestedArea()+", "+cp.getDate()+", "+cp.getClimateCategory()+", "+
 		cp.getExplanation()+", "+cp.getScore()+", "+cp.getNotes()+")";
@@ -222,7 +214,7 @@ private ArrayList <InterestedArea> searchAreaName(String name) {
 		return result;
 	}
 
-	private boolean registerUser(Registered user) { //TODO oggetto RegisteredUser
+	private boolean registerUser(Registered user) {
 		String query = "INSERT INTO operatoriRegistrati (CF, name, surname, mail, userid, password, nameCM) "
 				+ "VALUES ("+user.getSsn()+", "+user.getName()+", "+user.getSurname()+", "+user.getMail()+", "+user.getUser()+
 				", "+user.getPwd()+", "+user.getCentreName()+")";

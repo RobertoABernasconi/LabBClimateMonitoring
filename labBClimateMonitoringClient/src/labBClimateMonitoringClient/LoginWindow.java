@@ -47,7 +47,6 @@ public class LoginWindow extends JFrame {
 						break;
 					}
 					case "Registered": {
-						//TODO: leggere testo e verificare log in
 						verifyLogIn();
 						dispose();
 						break;
