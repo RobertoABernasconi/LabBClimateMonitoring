@@ -2,7 +2,7 @@ package labBClimateMonitoringServer;
 
 import java.io.Serializable;
 /**
- * Class that models a geographical area of interest
+ * Serializable class that models a geographical area of interest
  */
 public class InterestedArea implements Serializable{
 	

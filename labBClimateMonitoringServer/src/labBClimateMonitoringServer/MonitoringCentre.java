@@ -3,7 +3,7 @@ package labBClimateMonitoringServer;
 import java.io.Serializable;
 
 /**
- * Class that models a monitoring centre
+ * Serializable lass that models a monitoring centre
  */
 
 public class MonitoringCentre implements Serializable{

@@ -10,7 +10,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-
+/**
+ * Class that opens a new UI window for registering users. A registered user has access to more application functions
+ */
 public class RegistrationWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -23,7 +25,9 @@ public class RegistrationWindow extends JFrame {
 	private JTextField textField_5;
 	private JTextField textField_6;
 
-
+/**
+ * Creates the window
+ */
 	public static void start() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

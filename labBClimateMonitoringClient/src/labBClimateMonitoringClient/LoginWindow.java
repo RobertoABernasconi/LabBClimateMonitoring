@@ -10,14 +10,18 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-
+/**
+ * Class that opens a new UI window to let the user log in
+ */
 public class LoginWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtNomeUtente;
 	private JTextField txtPassword;
-
+/**
+ * Creates the log in window
+ */
 	public static void start() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -31,9 +35,7 @@ public class LoginWindow extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+	
 	private LoginWindow() {
 		ActionListener listener = new ActionListener() {
 			String cmd = null;

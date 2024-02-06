@@ -3,7 +3,9 @@ package labBClimateMonitoringClient;
 import java.net.*;
 import java.util.ArrayList;
 import java.io.*;
-
+/**
+ * Class implementing the Singleton design pattern that handles all client-server communication.
+ */
 public class ConnectionManager {
 	private static ConnectionManager instance = null; 
 	private ObjectOutputStream out;
@@ -36,14 +38,21 @@ public class ConnectionManager {
 				}
 			}
 	}
-	
+	/**
+	 * Singleton design pattern method to ensure there is only one ConnectionManager object at a time
+	 * @return returns the ConnectionManager instance
+	 */
 	public static synchronized ConnectionManager getInstance() {
 		if (instance == null) {
 			instance = new ConnectionManager();
 		}
 		return instance;
 	}
-
+	/**
+	 * Method to send a MonitoringCentre object to the server
+	 * @param centre the MonitoringCentre object to be sent
+	 * @return true if the method executed successfully, false if it raised an exception
+	 */
 	public boolean registerMonitoringCentre(MonitoringCentre centre) {
 		try {
 			instance.out.writeObject("registerMonitoringCentre");
@@ -54,7 +63,11 @@ public class ConnectionManager {
 			return false;
 		}
 	}
-
+	/**
+	 * Method to send a InterestedArea object to the server
+	 * @param result the InterestedArea object to be sent
+	 * @return true if the method executed successfully, false if it raised an exception
+	 */
 	public boolean registerArea(InterestedArea result) {
 		try {
 			instance.out.writeObject("registerArea");
@@ -65,7 +78,12 @@ public class ConnectionManager {
 			return false;
 		}
 	}
-
+	/**
+	 * Method to attempt to log in the user to the registered application functions.
+	 * @param user username to use
+	 * @param pw password to use
+	 * @return true if the method executed successfully, false if it raised an exception
+	 */
 	public boolean userLogin(String user, String pw) {
 		try {
 			instance.out.writeObject("login");
@@ -86,7 +104,11 @@ public class ConnectionManager {
 		}
 		return false;
 	}
-
+	/**
+	 * Method to send a ClimateParameters object to the server
+	 * @param parameters the ClimateParameters object to be sent
+	 * @return true if the method executed successfully, false if it raised an exception
+	 */
 	public boolean addParameters(ClimateParameters parameters) {
 		try {
 			instance.out.writeObject("insertClimateParameters");
@@ -97,7 +119,11 @@ public class ConnectionManager {
 		}
 		return false;
 	}
-
+	/**
+	 * Method to send a Registered object to the server in order to register a new user
+	 * @param registeredObject the Registered object to be sent
+	 * @return true if the method executed successfully, false if it raised an exception
+	 */
 	public boolean registerUser(Registered registeredObject) {
 		try {
 			instance.out.writeObject("registerUser");
@@ -108,7 +134,11 @@ public class ConnectionManager {
 		}
 		return false;
 	}
-	
+	/**
+	 * Method to search for the name of an area
+	 * @param name the name to search, the server will look for similar names in the DB
+	 * @return an ArrayList containing all the matching InterestedArea objects found
+	 */
 	public ArrayList <InterestedArea> searchArea(String name) {
 			ArrayList <InterestedArea> result = null;
 			try {
@@ -121,7 +151,12 @@ public class ConnectionManager {
 			}
 			return result;
 	}
-	
+	/**
+	 * Method to search for areas matching a certain latitude and longitude
+	 * @param lat the latitude to search for
+	 * @param lon the longitude to search for
+	 * @return an ArrayList containing all the matching InterestedArea objects found
+	 */	
 	public ArrayList <InterestedArea> searchArea(Double lat, Double lon) {
 		ArrayList <InterestedArea> result = null;
 		try {
@@ -135,7 +170,11 @@ public class ConnectionManager {
 		}
 		return result;
 	}
-
+	/**
+	 * Method to retrieve all the ClimateParameters pertaining an area of interest
+	 * @param name the name of the area to look for
+	 * @return an ArrayList containing the ClimateParameters to be shown to the user
+	 */
 	public ArrayList <ClimateParameters> viewArea(String name) {
 		ArrayList <ClimateParameters> result = null;
 		try {

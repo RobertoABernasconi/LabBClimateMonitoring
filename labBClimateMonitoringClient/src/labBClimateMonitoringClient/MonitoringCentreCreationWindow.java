@@ -11,6 +11,9 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+/**
+ * Class that opens a new UI window to let registered users create a new MonitoringCentre
+ */
 public class MonitoringCentreCreationWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -22,9 +25,9 @@ public class MonitoringCentreCreationWindow extends JFrame {
 	private JTextField textField_4;
 	private JTextField textField_5;
 	private JTextField textField_6;
-	
+
 	/**
-	 * Launch the application.
+	 * Creates the window
 	 */
 	public static void start() {
 		EventQueue.invokeLater(new Runnable() {

@@ -15,7 +15,9 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
-
+/**
+ * Class that opens a new UI window for registered users.
+ */
 public class RegisteredMenuWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -25,10 +27,9 @@ public class RegisteredMenuWindow extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_4;
 	private DefaultListModel<String> listModel = new DefaultListModel<String>();
-
-	/**
-	 * Launch the application.
-	 */
+/**
+ * Creates the window
+ */
 	public static void start() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -42,9 +43,6 @@ public class RegisteredMenuWindow extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	private RegisteredMenuWindow() {
 		
 		ActionListener listener = new ActionListener() {
@@ -66,7 +64,7 @@ public class RegisteredMenuWindow extends JFrame {
 						iaList = ConnectionManager.getInstance().searchArea(textField.getText());
 					}
 					for (int i = 0; i < iaList.size(); i++) {
-						listModel.addElement(iaList.get(i).toString());
+						listModel.addElement(iaList.get(i).getName());
 					}
 					if (iaList.size() == 0) {
 						listModel = new DefaultListModel<String>();

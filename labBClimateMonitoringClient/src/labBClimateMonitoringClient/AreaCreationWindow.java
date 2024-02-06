@@ -10,7 +10,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-
+/**
+ * Class that opens a new UI window for creating InterestedArea objects to add to the DB
+ */
 public class AreaCreationWindow extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
@@ -22,7 +24,7 @@ public class AreaCreationWindow extends JFrame {
 	private JTextField textField_4;
 	private JTextField textField_5;
 	/**
-	 * Create a new window
+	 * Creates a new window
 	 */
 	public static void start() {
 		EventQueue.invokeLater(new Runnable() {

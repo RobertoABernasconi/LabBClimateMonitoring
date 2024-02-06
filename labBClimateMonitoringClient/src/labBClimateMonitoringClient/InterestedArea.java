@@ -1,7 +1,9 @@
 package labBClimateMonitoringClient;
 
 import java.io.Serializable;
-
+/**
+ * Serializable class that models a geographical area of interest
+ */
 public class InterestedArea implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -11,7 +13,9 @@ public class InterestedArea implements Serializable{
 	private String name;
 	private String state;
 	private String countryCode;
-	
+	/**
+	 * Empty constructor
+	 */
 	public InterestedArea() {
 		this.geo_ID = 0;
 		this.lat = 0.0;
@@ -21,6 +25,15 @@ public class InterestedArea implements Serializable{
 		this.countryCode = "";
 	}
 
+	/**
+	 * Constructor with parameters:
+	 * @param geo_ID DB key identifying the area
+	 * @param lat latitude of the area
+	 * @param lon longitude of the area
+	 * @param name name of the area
+	 * @param state state the area is in
+	 * @param countryCode code of the country the area is in
+	 */
 	public InterestedArea(int geo_ID, double lat, double lon, String name, String state,
 			String countryCode) {
 		this.geo_ID = geo_ID;
@@ -78,9 +91,4 @@ public class InterestedArea implements Serializable{
 	public synchronized void setCountryCode(String countryCode) {
 		this.countryCode = countryCode;
 	}
-	
-	
-	
-	
-
 }

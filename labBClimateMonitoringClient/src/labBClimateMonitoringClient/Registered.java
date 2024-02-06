@@ -1,7 +1,9 @@
 package labBClimateMonitoringClient;
 
 import java.io.Serializable;
-
+/**
+ * Serializable class that models a registered user
+ */
 public class Registered implements Serializable{
 	
 	private static final long serialVersionUID = 1;
@@ -15,6 +17,9 @@ public class Registered implements Serializable{
 	private String centreName;
 	private boolean loggedIn;
 	
+	/**
+	 * Empty constructor
+	 */
 	public Registered()
 	{
 		name = "";
@@ -26,7 +31,16 @@ public class Registered implements Serializable{
 		centreName = "";
 		loggedIn = false;
 	}
-
+	/**
+	 * Constructor with parameters:
+	 * @param name Name of the user
+	 * @param surname Surname of the user
+	 * @param ssn Social security number of the user
+	 * @param mail E-Mail address of the user
+	 * @param user User name chosen by the user
+	 * @param pwd Password chosen or inputted by the user
+	 * @param centreName Name of the centre that the user is registered to
+	 */
 	public Registered(String name, String surname, String ssn, String mail, String user, String pwd, String centreName) {
 		super();
 		this.name = name;
@@ -102,9 +116,4 @@ public class Registered implements Serializable{
 	public synchronized void setLoggedIn(boolean loggedIn) {
 		this.loggedIn = loggedIn;
 	}
-	
-	
-	
-	
-
 }

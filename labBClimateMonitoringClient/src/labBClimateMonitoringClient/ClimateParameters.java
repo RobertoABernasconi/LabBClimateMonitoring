@@ -3,7 +3,7 @@ package labBClimateMonitoringClient;
 import java.io.Serializable;
 
 /**
- * Class modelling an entry in the DB submitted by a registered user.
+ * Serializable class modelling an entry in the DB submitted by a registered user.
  */
 
 public class ClimateParameters implements Serializable{

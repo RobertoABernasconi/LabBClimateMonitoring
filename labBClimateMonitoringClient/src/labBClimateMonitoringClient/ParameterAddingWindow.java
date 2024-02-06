@@ -10,7 +10,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-
+/**
+ * Class that opens a new UI window for adding ClimateParameters to the server DB
+ */
 public class ParameterAddingWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -23,7 +25,9 @@ public class ParameterAddingWindow extends JFrame {
 	private JTextField textField_5;
 	private JTextField textField_6;
 
-	
+/**
+ * Creates the window	
+ */
 	public static void start() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -37,9 +41,6 @@ public class ParameterAddingWindow extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	private ParameterAddingWindow() {
 		
 		ActionListener listener = new ActionListener() {

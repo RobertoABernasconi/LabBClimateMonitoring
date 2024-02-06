@@ -9,13 +9,18 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JTextField;
-
+/**
+ * Class that opens a new UI window to show errors found during execution
+ */
 public class ErrorWindow extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
-
+/**
+ * Creates the error UI window, showing an error message
+ * @param error The error to be shown
+ */
 	public static void start(String error) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -29,9 +34,6 @@ public class ErrorWindow extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	private ErrorWindow(String error) {
 		
 		ActionListener listener = new ActionListener() {

@@ -12,7 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
-
+/**
+ * Class that opens a new UI window for viewing all the climate parameters associated with a certain area
+ */
 public class AreaViewWindow extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
@@ -21,9 +23,9 @@ public class AreaViewWindow extends JFrame {
 	private DefaultListModel<String> listModel = new DefaultListModel<String>();
 	
 	/**
-	 * Create a new window
-	 * Takes an ArrayList<ClimateParameters> as parameter 
-	 * @param arrayList
+	 * Creates a new window
+	 * Takes an ArrayList<ClimateParameters> as parameter to display in a scrollable list
+	 * @param arrayList the list of ClimateParameters to be displayed
 	 */
 	public static void start(ArrayList<ClimateParameters> arrayList) {
 		EventQueue.invokeLater(new Runnable() {

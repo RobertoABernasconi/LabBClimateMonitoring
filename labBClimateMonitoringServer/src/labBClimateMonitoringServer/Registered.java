@@ -2,7 +2,7 @@ package labBClimateMonitoringServer;
 
 import java.io.Serializable;
 /**
- * Class that models a registered user
+ * Serializable class that models a registered user
  */
 public class Registered implements Serializable{
 	

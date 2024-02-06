@@ -15,7 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
 import java.awt.Component;
-
+/**
+ * Class that opens a new UI main menu window for unregistered users.
+ */
 public class UnregisteredMenuWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -25,7 +27,9 @@ public class UnregisteredMenuWindow extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_4;
 	private DefaultListModel<String> listModel = new DefaultListModel<String>();
-
+/**
+ * Creates the window
+ */
 	public static void start() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -39,9 +43,6 @@ public class UnregisteredMenuWindow extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	private UnregisteredMenuWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 640, 480);
@@ -73,7 +74,7 @@ public class UnregisteredMenuWindow extends JFrame {
 						iaList = ConnectionManager.getInstance().searchArea(textField.getText());
 					}
 					for (int i = 0; i < iaList.size(); i++) {
-						listModel.addElement(iaList.get(i).toString());
+						listModel.addElement(iaList.get(i).getName());
 					}
 					if (iaList.size() == 0) {
 						listModel = new DefaultListModel<String>();
