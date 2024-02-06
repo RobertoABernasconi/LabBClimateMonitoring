@@ -41,9 +41,6 @@ public class AreaCreationWindow extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	private AreaCreationWindow() {
 		
 		ActionListener listener = new ActionListener() {

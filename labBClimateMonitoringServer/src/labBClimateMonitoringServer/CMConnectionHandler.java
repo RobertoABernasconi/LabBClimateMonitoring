@@ -81,7 +81,7 @@ public class CMConnectionHandler extends Thread{
 					break;
 				case "viewArea" :
 					String name = (String) in.readObject();
-					ArrayList<ClimateParameters> climateParam = ViewArea(name);
+					ArrayList<ClimateParameters> climateParam = viewArea(name);
 					out.writeObject(climateParam);
 					break;
 				case "registerMonitoringCentre" : //TODO oggetto
@@ -112,7 +112,7 @@ public class CMConnectionHandler extends Thread{
 		
 	}
 	
-	private ArrayList<ClimateParameters> ViewArea(String name) {
+	private ArrayList<ClimateParameters> viewArea(String name) {
 		
 		ArrayList <ClimateParameters> cpArray = new ArrayList <ClimateParameters>();
 		ArrayList <InterestedArea> inA = searchAreaName(name);
