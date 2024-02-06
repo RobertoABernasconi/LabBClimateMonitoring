@@ -4,6 +4,8 @@ import java.sql.*;
 
 /**
  * Class that handles all DB operations.
+ * @author Roberto Alfonso Bernasconi
+ * @author Andrea Magliocca
  */
 public class DBManager {
 	

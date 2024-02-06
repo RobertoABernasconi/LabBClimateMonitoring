@@ -54,7 +54,7 @@
                         <configuration>
                             <url>jdbc:postgresql://localhost:5433/</url>
                             <username>postgres</username>
-                            <password>password</password>
+                            <password>postgres</password>
                             <autocommit>true</autocommit>
                             <sqlCommand>drop database if exists climatemonitoring</sqlCommand>
                         </configuration>
@@ -69,7 +69,7 @@
                         <configuration>
                             <url>jdbc:postgresql://localhost:5433/</url>
                             <username>postgres</username>
-                            <password>password</password>
+                            <password>postgres</password>
                             <autocommit>true</autocommit>
                             <sqlCommand>create database climatemonitoring</sqlCommand>
                         </configuration>
@@ -84,7 +84,7 @@
                         <configuration>
                             <url>jdbc:postgresql://localhost:5433/climatemonitoring</url>
                             <username>postgres</username>
-                            <password>password</password>
+                            <password>postgres</password>
                             <autocommit>true</autocommit>
                             <srcFiles>
                                 <srcFile>src/main/sql/ClimateMonitoringTest.sql</srcFile>

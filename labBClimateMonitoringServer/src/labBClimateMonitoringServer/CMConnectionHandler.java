@@ -9,6 +9,8 @@ import java.io.*;
 /**
  * Class extending Thread to handle the connection to the clients.
  * Uses a Socket and input / output streams
+ * @author Roberto Alfonso Bernasconi
+ * @author Andrea Magliocca
  */
 
 public class CMConnectionHandler extends Thread{

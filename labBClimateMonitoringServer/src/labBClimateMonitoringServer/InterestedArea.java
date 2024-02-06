@@ -3,6 +3,8 @@ package labBClimateMonitoringServer;
 import java.io.Serializable;
 /**
  * Serializable class that models a geographical area of interest
+ * @author Roberto Alfonso Bernasconi
+ * @author Andrea Magliocca
  */
 public class InterestedArea implements Serializable{
 	

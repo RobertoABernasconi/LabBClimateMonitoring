@@ -12,6 +12,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 /**
  * Class that opens a new UI window for creating InterestedArea objects to add to the DB
+ * @author Roberto Alfonso Bernasconi
+ * @author Andrea Magliocca
  */
 public class AreaCreationWindow extends JFrame {
 	

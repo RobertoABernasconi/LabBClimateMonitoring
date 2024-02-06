@@ -14,6 +14,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 /**
  * Class that opens a new UI window for viewing all the climate parameters associated with a certain area
+ * @author Roberto Alfonso Bernasconi
+ * @author Andrea Magliocca
  */
 public class AreaViewWindow extends JFrame {
 	

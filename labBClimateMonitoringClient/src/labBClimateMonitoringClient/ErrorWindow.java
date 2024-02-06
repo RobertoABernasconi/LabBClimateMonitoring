@@ -11,6 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 /**
  * Class that opens a new UI window to show errors found during execution
+ * @author Roberto Alfonso Bernasconi
+ * @author Andrea Magliocca
  */
 public class ErrorWindow extends JFrame {
 	

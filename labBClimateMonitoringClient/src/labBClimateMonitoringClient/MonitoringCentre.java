@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 /**
  * Serializable lass that models a monitoring centre
+ * @author Roberto Alfonso Bernasconi
+ * @author Andrea Magliocca
  */
 
 public class MonitoringCentre implements Serializable{

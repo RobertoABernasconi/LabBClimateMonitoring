@@ -3,6 +3,8 @@ package labBClimateMonitoringServer;
 import java.util.Scanner;
 /**
  * Main class, to be started from the command line.
+ * @author Roberto Alfonso Bernasconi
+ * @author Andrea Magliocca
  */
 public class ServerMain {
 /**

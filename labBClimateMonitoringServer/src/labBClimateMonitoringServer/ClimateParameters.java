@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 /**
  * Serializable class modelling an entry in the DB submitted by a registered user.
+ * @author Roberto Alfonso Bernasconi
+ * @author Andrea Magliocca
  */
 
 public class ClimateParameters implements Serializable{

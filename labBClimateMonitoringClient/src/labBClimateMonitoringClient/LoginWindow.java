@@ -12,6 +12,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 /**
  * Class that opens a new UI window to let the user log in
+ * @author Roberto Alfonso Bernasconi
+ * @author Andrea Magliocca
  */
 public class LoginWindow extends JFrame {
 

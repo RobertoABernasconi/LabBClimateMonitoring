@@ -4,6 +4,8 @@ import java.net.*;
 import java.io.*;
 /**
  * CMServer class that awaits connections and launches CMConnectionHandler threads for each successful connection
+ * @author Roberto Alfonso Bernasconi
+ * @author Andrea Magliocca
  */
 public class CMServer {
 	private ServerSocket serverSocket;

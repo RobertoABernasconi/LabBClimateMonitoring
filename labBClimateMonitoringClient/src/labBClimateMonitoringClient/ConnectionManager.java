@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.io.*;
 /**
  * Class implementing the Singleton design pattern that handles all client-server communication.
+ * @author Roberto Alfonso Bernasconi
+ * @author Andrea Magliocca
  */
 public class ConnectionManager {
 	private static ConnectionManager instance = null; 

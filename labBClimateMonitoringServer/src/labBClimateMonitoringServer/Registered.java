@@ -3,6 +3,8 @@ package labBClimateMonitoringServer;
 import java.io.Serializable;
 /**
  * Serializable class that models a registered user
+ * @author Roberto Alfonso Bernasconi
+ * @author Andrea Magliocca
  */
 public class Registered implements Serializable{
 	

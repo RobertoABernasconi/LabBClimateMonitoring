@@ -17,6 +17,8 @@ import javax.swing.JList;
 import java.awt.Component;
 /**
  * Class that opens a new UI main menu window for unregistered users.
+ * @author Roberto Alfonso Bernasconi
+ * @author Andrea Magliocca
  */
 public class UnregisteredMenuWindow extends JFrame {
 

@@ -12,6 +12,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 /**
  * Class that opens a new UI window for registering users. A registered user has access to more application functions
+ * @author Roberto Alfonso Bernasconi
+ * @author Andrea Magliocca
  */
 public class RegistrationWindow extends JFrame {
 

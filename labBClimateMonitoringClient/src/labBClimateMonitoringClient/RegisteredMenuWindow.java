@@ -17,6 +17,8 @@ import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 /**
  * Class that opens a new UI window for registered users.
+ * @author Roberto Alfonso Bernasconi
+ * @author Andrea Magliocca
  */
 public class RegisteredMenuWindow extends JFrame {
 

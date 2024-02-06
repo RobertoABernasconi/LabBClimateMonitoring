@@ -1,6 +1,8 @@
 package labBClimateMonitoringClient;
 /**
  * Class containing the main method
+ * @author Roberto Alfonso Bernasconi
+ * @author Andrea Magliocca
  */
 public class ClientMain {
 /**

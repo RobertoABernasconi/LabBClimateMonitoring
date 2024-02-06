@@ -13,6 +13,8 @@ import javax.swing.JButton;
 
 /**
  * Class that opens a new UI window to let registered users create a new MonitoringCentre
+ * @author Roberto Alfonso Bernasconi
+ * @author Andrea Magliocca
  */
 public class MonitoringCentreCreationWindow extends JFrame {
 
