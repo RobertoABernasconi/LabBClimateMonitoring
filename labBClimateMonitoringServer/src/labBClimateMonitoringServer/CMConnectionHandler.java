@@ -6,25 +6,36 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.io.*;
 
+/**
+ * Class extending Thread to handle the connection to the clients.
+ * Uses a Socket and input / output streams
+ */
+
 public class CMConnectionHandler extends Thread{
 	private Socket clientSocket;
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
 	private DBManager dbM;
 	
+	/**
+	 * Constructor. Creates a new CMConnectionHandler object and invokes run()
+	 * @param socket socket to use
+	 * @param dbm2 database to use
+	 */
 	public CMConnectionHandler(Socket socket, DBManager dbm2) {
 		this.clientSocket = socket;
 		this.dbM = dbm2;
 	}
-	
+	/**
+	 * Takes String commands from the client in order to execute relevant operations
+	 * @override overrides the Thread run() method
+	 */
 	public void run() {
 		try {
 			out = new ObjectOutputStream(clientSocket.getOutputStream());
 			in = new ObjectInputStream(clientSocket.getInputStream());			
 			String input;
-			boolean result = false;
-			//todo gestione username, password e host per connettere al DB, se non sono valide, annulla la connessione
-			
+			boolean result = false;			
 			
 			while(true) {
 				input = in.readObject().toString();

@@ -2,6 +2,10 @@ package labBClimateMonitoringServer;
 
 import java.io.Serializable;
 
+/**
+ * Class modelling an entry in the DB submitted by a registered user.
+ */
+
 public class ClimateParameters implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -25,6 +29,15 @@ public class ClimateParameters implements Serializable{
 		this.notes = "";
 	}
 	
+	/**
+	 * @param nameCM MonitoringCentre object
+	 * @param interestedArea InterestedArea object
+	 * @param date date of the data to be inserted
+	 * @param climateCategory category of the phenomenon
+	 * @param explanation natural text explaining
+	 * @param score number evaluation of the phenomenon
+	 * @param notes notes about the entry
+	 */
 	public ClimateParameters(MonitoringCentre nameCM, InterestedArea interestedArea, String date,
 			String climateCategory, String explanation, int score, String notes) {
 		super();

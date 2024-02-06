@@ -2,6 +2,10 @@ package labBClimateMonitoringServer;
 
 import java.io.Serializable;
 
+/**
+ * Class that models a monitoring centre
+ */
+
 public class MonitoringCentre implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -14,6 +18,9 @@ public class MonitoringCentre implements Serializable{
 	private String city;
 	private String province;
 	
+	/**
+	 * Empty constructor
+	 */
 	public MonitoringCentre() {
 		this.centreName = "";
 		this.area = 0;
@@ -24,6 +31,16 @@ public class MonitoringCentre implements Serializable{
 		this.province = "";
 	}
 
+	/**
+	 * Contructor with parameters:
+	 * @param centreName Name of the centre
+	 * @param area Number corresponding to the area ID
+	 * @param address Address with no street number
+	 * @param streetNumber Street number of the address
+	 * @param postalCode Postal code of the centre
+	 * @param city City the centre is in
+	 * @param province Province the centre is in
+	 */
 	public MonitoringCentre(String centreName, int area, String address, int streetNumber, int postalCode, String city,
 			String province) {
 		this.centreName = centreName;
@@ -90,8 +107,4 @@ public class MonitoringCentre implements Serializable{
 	public synchronized void setProvince(String province) {
 		this.province = province;
 	}
-	
-	
-	
-	
 }

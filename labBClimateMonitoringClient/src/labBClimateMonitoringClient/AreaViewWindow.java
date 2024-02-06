@@ -19,7 +19,12 @@ public class AreaViewWindow extends JFrame {
 	private JPanel contentPane;
 	private JList<String> list = null;
 	private DefaultListModel<String> listModel = new DefaultListModel<String>();
-
+	
+	/**
+	 * Create a new window
+	 * Takes an ArrayList<ClimateParameters> as parameter 
+	 * @param arrayList
+	 */
 	public static void start(ArrayList<ClimateParameters> arrayList) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -34,10 +39,7 @@ public class AreaViewWindow extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 * @param areas 
-	 */
+	
 	private AreaViewWindow(ArrayList<ClimateParameters> arrayList) {
 		
 		if(arrayList.size()>0) {

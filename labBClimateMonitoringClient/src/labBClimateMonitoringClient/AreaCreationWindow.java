@@ -22,7 +22,7 @@ public class AreaCreationWindow extends JFrame {
 	private JTextField textField_4;
 	private JTextField textField_5;
 	/**
-	 * Launch the application.
+	 * Create a new window
 	 */
 	public static void start() {
 		EventQueue.invokeLater(new Runnable() {

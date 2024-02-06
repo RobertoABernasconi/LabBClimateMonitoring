@@ -25,12 +25,8 @@ public class ConnectionManager {
 		    System.out.println("Connected to " + client.getRemoteSocketAddress());
 		    out = new ObjectOutputStream(client.getOutputStream());
 		    in = new ObjectInputStream(client.getInputStream());
-
-		    while (true) {
-		    	in.readObject();
-		    }
 		    
-			} catch (IOException | ClassNotFoundException e) {
+			} catch (IOException e) {
 				e.printStackTrace();
 			} finally {
 				try {

@@ -1,6 +1,5 @@
 package labBClimateMonitoringServer;
 
-import java.io.*;
 import java.util.Scanner;
 
 public class ServerMain {
@@ -28,11 +27,6 @@ public class ServerMain {
 		} finally {
 			scanner.close();
 		}
-		
-		try {
 			CMServer server = new CMServer(port, dbm);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 }
