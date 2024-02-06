@@ -1,9 +1,14 @@
 package labBClimateMonitoringServer;
 
 import java.util.Scanner;
-
+/**
+ * Main class, to be started from the command line.
+ */
 public class ServerMain {
-
+/**
+ * Main method, asks the server owner to insert DB username, DB password and DB host address
+ * @param args Required by java, not used here
+ */
 	public static void main(String[] args) {
 		final int port = 6066;
 		Scanner scanner = new Scanner(System.in);
