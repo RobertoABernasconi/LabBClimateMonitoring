@@ -20,12 +20,13 @@ public class ParameterAddingWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField textFieldLat;
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
 	private JTextField textField_6;
+	private JTextField textFieldLon;
 
 /**
  * Creates the window	
@@ -72,12 +73,12 @@ public class ParameterAddingWindow extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Centre Name*");
+		JLabel lblNewLabel = new JLabel("Centre Name");
 		lblNewLabel.setBounds(31, 10, 90, 13);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Coordinates*");
-		lblNewLabel_1.setBounds(31, 33, 90, 13);
+		JLabel lblNewLabel_1 = new JLabel("Latitude and Longitude");
+		lblNewLabel_1.setBounds(31, 33, 141, 13);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Date");
@@ -85,7 +86,7 @@ public class ParameterAddingWindow extends JFrame {
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Climate Category");
-		lblNewLabel_3.setBounds(31, 79, 90, 13);
+		lblNewLabel_3.setBounds(31, 79, 111, 13);
 		contentPane.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Explanation");
@@ -105,10 +106,10 @@ public class ParameterAddingWindow extends JFrame {
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(196, 30, 96, 19);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		textFieldLat = new JTextField();
+		textFieldLat.setBounds(196, 30, 96, 19);
+		contentPane.add(textFieldLat);
+		textFieldLat.setColumns(10);
 		
 		textField_2 = new JTextField();
 		textField_2.setBounds(196, 53, 96, 19);
@@ -146,11 +147,17 @@ public class ParameterAddingWindow extends JFrame {
 		btnNewButton_1.addActionListener(listener);
 		btnNewButton_1.setActionCommand("Cancel");
 		contentPane.add(btnNewButton_1);
+		
+		textFieldLon = new JTextField();
+		textFieldLon.setColumns(10);
+		textFieldLon.setBounds(311, 30, 96, 19);
+		contentPane.add(textFieldLon);
 	}
 	
 	private ClimateParameters createParameters() {
-		ClimateParameters centre;		
-		centre = new ClimateParameters( );
+		ClimateParameters centre;
+		//temp
+		centre = new ClimateParameters(new MonitoringCentre(textField.getText(), 0, "", 0, 0, "", ""), new InterestedArea(0, Double.parseDouble(textFieldLat.getText()), Double.parseDouble(textFieldLon.getText()), "", "", ""), textField_2.getText(), textField_3.getText(), textField_4.getText(), Integer.parseInt(textField_5.getText()), textField_6.getText());
 		return centre;
 	}
 }

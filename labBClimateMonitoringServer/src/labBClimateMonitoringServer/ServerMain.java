@@ -19,8 +19,7 @@ public class ServerMain {
 		try {
 			while(!correct) {
 			
-				dbm = new DBManager();
-				System.out.println("Insert DB username: ");
+				dbm = new DBManager();System.out.println("Insert DB username: ");
 				String user = scanner.nextLine();
 				System.out.println("Insert DB password: ");
 				String pw = scanner.nextLine();

@@ -57,7 +57,7 @@ public class RegisteredMenuWindow extends JFrame {
 					AreaViewWindow.start(ConnectionManager.getInstance().viewArea(textField_4.getText()));
 					break;
 				case "Search for Area":
-					ArrayList<InterestedArea> iaList = null;
+					ArrayList<InterestedArea> iaList = new ArrayList<InterestedArea>();
 					if (textField.getText().isBlank()) {
 						if(!(textField_1.getText().isBlank() || textField_2.getText().isBlank())) {
 							iaList = ConnectionManager.getInstance().searchArea(Double.parseDouble(textField_1.getText()),Double.parseDouble(textField_2.getText()));

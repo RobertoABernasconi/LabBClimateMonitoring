@@ -13,6 +13,7 @@ public class ConnectionManager {
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
 	private Socket client = null;
+	
 	private ConnectionManager() {
 		int port = 6066;
 		InetAddress address = null;

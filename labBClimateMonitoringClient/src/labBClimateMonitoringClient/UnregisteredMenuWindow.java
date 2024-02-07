@@ -67,7 +67,7 @@ public class UnregisteredMenuWindow extends JFrame {
 					RegistrationWindow.start();
 					break;
 				case "Search for Area":
-					ArrayList<InterestedArea> iaList = null;
+					ArrayList<InterestedArea> iaList = new ArrayList<InterestedArea>();
 					if (textField.getText().isBlank()) {
 						if(!(textField_1.getText().isBlank() || textField_2.getText().isBlank())) {
 							iaList = ConnectionManager.getInstance().searchArea(Double.parseDouble(textField_1.getText()),Double.parseDouble(textField_2.getText()));
@@ -78,7 +78,7 @@ public class UnregisteredMenuWindow extends JFrame {
 					for (int i = 0; i < iaList.size(); i++) {
 						listModel.addElement(iaList.get(i).getName());
 					}
-					if (iaList.size() == 0) {
+					if (iaList.size() == 0 || iaList.isEmpty()) {
 						listModel = new DefaultListModel<String>();
 						listModel.addElement("No parameters found");
 					}
@@ -156,6 +156,7 @@ public class UnregisteredMenuWindow extends JFrame {
 		contentPane.add(scrollPane);
 		
 		JList<String> listView = new JList<String>(listModel);
+		listView.setVisibleRowCount(3);
 		scrollPane.setViewportView(listView);
 	}
 }
